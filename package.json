@@ -1,12 +1,12 @@
 {
-  "name": "@unrest/react-core",
+  "name": "@unrest/core",
   "description": "Kitchen sink repo for personal react projects",
   "version": "0.0.1",
   "main": "dist",
   "directories": {
     "lib": "dist"
   },
-  "repository": "https://github.com/chriscauley/unrest-react-core.git",
+  "repository": "https://github.com/chriscauley/unrest-core.git",
   "author": "chriscauley",
   "license": "MIT",
   "scripts": {
