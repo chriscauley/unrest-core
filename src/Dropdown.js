@@ -53,7 +53,7 @@ class Dropdown extends React.Component {
           {badge ? <span className={css.badge.danger()}>{badge}</span> : null}
         </div>
         <div
-          className={css.dropdown.shelf(this.state.open ? 'block' : 'hidden')}
+          className={css.dropdown.menu(this.state.open ? 'block' : 'hidden')}
         >
           {links.map((link, i) => (
             <DropdownLink {...prepLink(link)} key={i} />

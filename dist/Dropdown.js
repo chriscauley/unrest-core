@@ -138,7 +138,7 @@ var Dropdown = /*#__PURE__*/function (_React$Component) {
       }, children, badge ? /*#__PURE__*/_react["default"].createElement("span", {
         className: _css["default"].badge.danger()
       }, badge) : null), /*#__PURE__*/_react["default"].createElement("div", {
-        className: _css["default"].dropdown.shelf(this.state.open ? 'block' : 'hidden')
+        className: _css["default"].dropdown.menu(this.state.open ? 'block' : 'hidden')
       }, links.map(function (link, i) {
         return /*#__PURE__*/_react["default"].createElement(DropdownLink, _extends({}, prepLink(link), {
           key: i
