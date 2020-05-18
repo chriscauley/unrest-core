@@ -12,4 +12,5 @@ export default (() => {
       start = new Date().valueOf()
     },
   })
+  return t
 })()

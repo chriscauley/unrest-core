@@ -21,6 +21,7 @@ var _default = function () {
       start = new Date().valueOf();
     }
   });
+  return t;
 }();
 
 exports["default"] = _default;
