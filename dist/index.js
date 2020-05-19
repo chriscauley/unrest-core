@@ -5,6 +5,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+Object.defineProperty(exports, "alert", {
+  enumerable: true,
+  get: function get() {
+    return _alert["default"];
+  }
+});
 Object.defineProperty(exports, "Dropdown", {
   enumerable: true,
   get: function get() {
@@ -41,6 +47,8 @@ Object.defineProperty(exports, "t", {
     return _t["default"];
   }
 });
+
+var _alert = _interopRequireDefault(require("./alert"));
 
 var _Dropdown = _interopRequireDefault(require("./Dropdown"));
 
