@@ -68,7 +68,8 @@ var config = {
   },
   getCSRF: getCSRF,
   processServerErrors: processServerErrors,
-  unknown_error: 'An unknown error has occurred. Please try again.'
+  unknown_error: 'An unknown error has occurred. Please try again.',
+  base_url: ''
 };
 var _default = config;
 exports["default"] = _default;

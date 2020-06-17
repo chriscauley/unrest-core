@@ -27,9 +27,24 @@ export const afterFetch = (response) => {
 }
 
 export default (url, data) => {
-  return fetch(url, {
+  return fetch(config.base_url + url, {
     body: JSON.stringify(data),
     method: 'POST',
     headers: config.getHeaders(),
+  }).then(afterFetch, handleError)
+}
+
+export const postForm = (url, data) => {
+  // like the default post, but using form data and multipart content type
+  const headers = config.getHeaders()
+  const formData = new FormData()
+  Object.entries(data).forEach(([key, value]) => {
+    formData.append(key, value)
+  })
+  delete headers['content-type']
+  return fetch(config.base_url + url, {
+    body: formData,
+    method: 'POST',
+    headers: headers,
   }).then(afterFetch, handleError)
 }

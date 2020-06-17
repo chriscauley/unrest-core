@@ -35,6 +35,12 @@ Object.defineProperty(exports, "handleError", {
     return _post.handleError;
   }
 });
+Object.defineProperty(exports, "postForm", {
+  enumerable: true,
+  get: function get() {
+    return _post.postForm;
+  }
+});
 Object.defineProperty(exports, "config", {
   enumerable: true,
   get: function get() {

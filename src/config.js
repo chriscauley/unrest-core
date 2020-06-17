@@ -34,6 +34,7 @@ const config = {
   getCSRF,
   processServerErrors,
   unknown_error: 'An unknown error has occurred. Please try again.',
+  base_url: '',
 }
 
 export default config
