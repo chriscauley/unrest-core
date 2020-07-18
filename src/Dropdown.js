@@ -12,8 +12,6 @@ const DropdownLink = ({ badge, children, ...props }) => {
   )
 }
 
-const ref = React.createRef(null)
-
 const prepLink = (link) =>
   typeof link === 'string' ? { children: link } : link
 
@@ -22,6 +20,7 @@ class Dropdown extends React.Component {
   toggle = () => this.setState({ open: !this.state.open })
 
   componentDidMount() {
+    this.ref = React.createRef()
     document.addEventListener('click', this.handleDocumentClick, false)
     document.addEventListener('touchend', this.handleDocumentClick, false)
   }
@@ -33,28 +32,29 @@ class Dropdown extends React.Component {
   }
 
   handleDocumentClick = (event) => {
-    if (this.state.open && event.target !== ref.current) {
+    const should_close = !this.ref.current.contains(event.target) || event.target.href
+    if (this.state.open && should_close) {
       this.setState({ open: false })
     }
   }
 
   render() {
-    const { user, badge, links = [], children, className } = this.props
+    const { user, badge, links = [], children, className, title } = this.props
     const funct = (value) => (typeof value === 'function' ? value(user) : value)
     const _badge = funct(badge, badge)
     return (
-      <div className={css.dropdown.outer()}>
+      <div className={css.dropdown.outer()} ref={this.ref}>
         <div
           className={css.dropdown.toggle(className)}
           onClick={this.toggle}
-          ref={ref}
         >
-          {children}
+          {title}
           {badge ? <span className={css.badge.danger()}>{badge}</span> : null}
         </div>
         <div
           className={css.dropdown.menu(this.state.open ? 'block' : 'hidden')}
         >
+          {children}
           {links.map((link, i) => (
             <DropdownLink {...prepLink(link)} key={i} />
           ))}

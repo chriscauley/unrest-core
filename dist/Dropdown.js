@@ -56,8 +56,6 @@ var DropdownLink = function DropdownLink(_ref) {
   }, badge) : null);
 };
 
-var ref = _react["default"].createRef(null);
-
 var prepLink = function prepLink(link) {
   return typeof link === 'string' ? {
     children: link
@@ -89,7 +87,9 @@ var Dropdown = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleDocumentClick", function (event) {
-      if (_this.state.open && event.target !== ref.current) {
+      var should_close = !_this.ref.current.contains(event.target) || event.target.href;
+
+      if (_this.state.open && should_close) {
         _this.setState({
           open: false
         });
@@ -102,6 +102,7 @@ var Dropdown = /*#__PURE__*/function (_React$Component) {
   _createClass(Dropdown, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.ref = _react["default"].createRef();
       document.addEventListener('click', this.handleDocumentClick, false);
       document.addEventListener('touchend', this.handleDocumentClick, false);
     }
@@ -121,7 +122,8 @@ var Dropdown = /*#__PURE__*/function (_React$Component) {
           _this$props$links = _this$props.links,
           links = _this$props$links === void 0 ? [] : _this$props$links,
           children = _this$props.children,
-          className = _this$props.className;
+          className = _this$props.className,
+          title = _this$props.title;
 
       var funct = function funct(value) {
         return typeof value === 'function' ? value(user) : value;
@@ -130,16 +132,16 @@ var Dropdown = /*#__PURE__*/function (_React$Component) {
       var _badge = funct(badge, badge);
 
       return /*#__PURE__*/_react["default"].createElement("div", {
-        className: _css["default"].dropdown.outer()
+        className: _css["default"].dropdown.outer(),
+        ref: this.ref
       }, /*#__PURE__*/_react["default"].createElement("div", {
         className: _css["default"].dropdown.toggle(className),
-        onClick: this.toggle,
-        ref: ref
-      }, children, badge ? /*#__PURE__*/_react["default"].createElement("span", {
+        onClick: this.toggle
+      }, title, badge ? /*#__PURE__*/_react["default"].createElement("span", {
         className: _css["default"].badge.danger()
       }, badge) : null), /*#__PURE__*/_react["default"].createElement("div", {
         className: _css["default"].dropdown.menu(this.state.open ? 'block' : 'hidden')
-      }, links.map(function (link, i) {
+      }, children, links.map(function (link, i) {
         return /*#__PURE__*/_react["default"].createElement(DropdownLink, _extends({}, prepLink(link), {
           key: i
         }));
