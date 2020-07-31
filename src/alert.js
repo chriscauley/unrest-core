@@ -64,12 +64,13 @@ const actions = {
 }
 
 const makeHook = globalHook(React, { items: [] }, actions)
+const useAlert = () => {
+  const [{ items }, actions] = makeHook()
+  return { items, ...actions }
+}
 
 export const connect = (Component) => (props) => {
-  const [state, actions] = makeHook()
-  const { items } = state
-  const alert_props = { items, ...actions }
-  return <Component {...props} alert={alert_props} />
+  return <Component {...props} alert={useAlert()} />
 }
 
 export const List = connect((props) => {
@@ -117,4 +118,5 @@ export default {
   List,
   TestAlert,
   config,
+  useAlert,
 }
