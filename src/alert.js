@@ -63,14 +63,11 @@ const actions = {
   warning: _add('warning'),
 }
 
-const makeHook = globalHook(React, { items: [] }, actions)
-const useAlert = () => {
-  const [{ items }, actions] = makeHook()
-  return { items, ...actions }
-}
+const useAlert = globalHook(React, { items: [] }, actions)
 
 export const connect = (Component) => (props) => {
-  return <Component {...props} alert={useAlert()} />
+  const [{ items }, actions] = useAlert()
+  return <Component {...props} alert={{items, ...actions}} />
 }
 
 export const List = connect((props) => {

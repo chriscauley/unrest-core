@@ -117,25 +117,21 @@ var actions = {
   error: _add('error'),
   warning: _add('warning')
 };
-var makeHook = (0, _useGlobalHook["default"])(_react["default"], {
+var useAlert = (0, _useGlobalHook["default"])(_react["default"], {
   items: []
 }, actions);
 
-var useAlert = function useAlert() {
-  var _makeHook = makeHook(),
-      _makeHook2 = _slicedToArray(_makeHook, 2),
-      items = _makeHook2[0].items,
-      actions = _makeHook2[1];
-
-  return _objectSpread({
-    items: items
-  }, actions);
-};
-
 var connect = function connect(Component) {
   return function (props) {
+    var _useAlert = useAlert(),
+        _useAlert2 = _slicedToArray(_useAlert, 2),
+        items = _useAlert2[0].items,
+        actions = _useAlert2[1];
+
     return /*#__PURE__*/_react["default"].createElement(Component, _extends({}, props, {
-      alert: useAlert()
+      alert: _objectSpread({
+        items: items
+      }, actions)
     }));
   };
 };
