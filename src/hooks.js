@@ -1,5 +1,6 @@
 import React from 'react'
 
+// designed to work like <select> element, this triggers open=false when any non-ref'd element is clicked
 export const Select = () => {
   const refs = {}
   const getRef = (key) => {

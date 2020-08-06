@@ -5,6 +5,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var _exportNames = {
+  alert: true,
+  Dropdown: true,
+  post: true,
+  afterFetch: true,
+  handleError: true,
+  postForm: true,
+  config: true,
+  t: true,
+  Tabs: true
+};
 Object.defineProperty(exports, "alert", {
   enumerable: true,
   get: function get() {
@@ -58,6 +69,19 @@ Object.defineProperty(exports, "Tabs", {
   get: function get() {
     return _Tabs["default"];
   }
+});
+
+var _hooks = require("./hooks");
+
+Object.keys(_hooks).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _hooks[key];
+    }
+  });
 });
 
 var _alert = _interopRequireDefault(require("./alert"));
