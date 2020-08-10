@@ -2,10 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import css from '@unrest/css'
 
-const DropdownLink = ({ badge, children, ...props }) => {
-  const Tag = props.to ? Link : 'a'
+const DropdownLink = ({ disabled, badge, children, ...props }) => {
+  let Tag = props.to ? Link : 'a'
+  if (disabled) {
+    Tag = 'div'
+    delete props.onClick
+  }
   return (
-    <Tag className={css.dropdown.item()} {...props}>
+    <Tag className={css.dropdown.item({disabled})} {...props}>
       {children}
       {badge ? <span className={css.badge.danger()}>{badge}</span> : null}
     </Tag>

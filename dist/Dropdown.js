@@ -44,13 +44,22 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 var DropdownLink = function DropdownLink(_ref) {
-  var badge = _ref.badge,
+  var disabled = _ref.disabled,
+      badge = _ref.badge,
       children = _ref.children,
-      props = _objectWithoutProperties(_ref, ["badge", "children"]);
+      props = _objectWithoutProperties(_ref, ["disabled", "badge", "children"]);
 
   var Tag = props.to ? _reactRouterDom.Link : 'a';
+
+  if (disabled) {
+    Tag = 'div';
+    delete props.onClick;
+  }
+
   return /*#__PURE__*/_react["default"].createElement(Tag, _extends({
-    className: _css["default"].dropdown.item()
+    className: _css["default"].dropdown.item({
+      disabled: disabled
+    })
   }, props), children, badge ? /*#__PURE__*/_react["default"].createElement("span", {
     className: _css["default"].badge.danger()
   }, badge) : null);
