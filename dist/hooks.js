@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.Select = void 0;
+exports["default"] = exports.useAutoScroll = exports.useSelect = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -21,54 +21,118 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var Select = function Select() {
-  var refs = {};
+// designed to work like <select> element, this triggers open=false when any non-ref'd element is clicked
+var useSelect = function useSelect() {
+  var _React$useState = _react["default"].useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      open = _React$useState2[0],
+      setOpen = _React$useState2[1];
 
-  var getRef = function getRef(key) {
-    if (!refs[key]) {
-      refs[key] = _react["default"].createRef();
-    }
+  var toggleRef = _react["default"].useRef();
 
-    return refs[key];
+  var childRef = _react["default"].useRef();
+
+  var toggle = function toggle() {
+    return setOpen(!open);
   };
 
-  return function () {
-    var _React$useState = _react["default"].useState(false),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        open = _React$useState2[0],
-        setOpen = _React$useState2[1];
+  _react["default"].useEffect(function () {
+    var close = function close(e) {
+      if (open) {
+        var keys = Object.keys(refs);
 
-    _react["default"].useEffect(function () {
-      var close = function close(e) {
-        if (open) {
-          var keys = Object.keys(refs);
+        for (var i = 0; i < keys.length; i++) {
+          var current = refs[keys[i]].current;
 
-          for (var i = 0; i < keys.length; i++) {
-            var current = refs[keys[i]].current;
-
-            if (current) {
-              if (current === e.target || current.contains(e.target)) {
-                return;
-              }
+          if (current) {
+            if (current === e.target || current.contains(e.target)) {
+              return;
             }
           }
-
-          setOpen(false);
         }
-      };
 
-      document.addEventListener('click', close);
-      return function () {
-        document.removeEventListener('click', close);
-      };
-    });
+        setOpen(false);
+      }
+    };
 
-    return [open, setOpen, getRef];
+    document.addEventListener('click', close);
+    return function () {
+      document.removeEventListener('click', close);
+    };
+  });
+
+  return {
+    open: open,
+    setOpen: setOpen,
+    toggle: toggle,
+    toggleRef: toggleRef,
+    childRef: childRef
   };
 };
 
-exports.Select = Select;
+exports.useSelect = useSelect;
+
+var useAutoScroll = function useAutoScroll() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$behavior = _ref.behavior,
+      behavior = _ref$behavior === void 0 ? 'smooth' : _ref$behavior,
+      _ref$block = _ref.block,
+      block = _ref$block === void 0 ? 'end' : _ref$block;
+
+  var ref = _react["default"].useRef();
+
+  var _React$useState3 = _react["default"].useState({
+    enabled: true,
+    first: false
+  }),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      _React$useState4$ = _React$useState4[0],
+      enabled = _React$useState4$.enabled,
+      first = _React$useState4$.first,
+      setState = _React$useState4[1];
+
+  var e = ref.current;
+
+  var scroll = function scroll() {
+    if (!first) {
+      e.scrollIntoView({
+        block: block
+      });
+    } else {
+      e.scrollIntoView({
+        behavior: behavior,
+        block: block
+      });
+    }
+  };
+
+  e && enabled && setTimeout(scroll, 0);
+
+  var onScroll = function onScroll(_ref2) {
+    var target = _ref2.target;
+    var scrollHeight = target.scrollHeight,
+        scrollTop = target.scrollTop,
+        clientHeight = target.clientHeight;
+    var new_enabled = scrollHeight === scrollTop + clientHeight;
+
+    if (!first || new_enabled !== enabled) {
+      setState({
+        enabled: new_enabled,
+        first: true
+      });
+    }
+  };
+
+  return {
+    enabled: enabled,
+    ref: ref,
+    onScroll: onScroll
+  };
+};
+
+exports.useAutoScroll = useAutoScroll;
 var _default = {
-  Select: Select
+  useAutoScroll: useAutoScroll,
+  useSelect: useSelect
 };
 exports["default"] = _default;
