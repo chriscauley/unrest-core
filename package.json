@@ -1,7 +1,7 @@
 {
   "name": "@unrest/core",
   "description": "Kitchen sink repo for personal react projects",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "dist",
   "directories": {
     "lib": "dist"
