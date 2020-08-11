@@ -13,8 +13,7 @@ var _exportNames = {
   handleError: true,
   postForm: true,
   config: true,
-  t: true,
-  Tabs: true
+  t: true
 };
 Object.defineProperty(exports, "alert", {
   enumerable: true,
@@ -64,12 +63,6 @@ Object.defineProperty(exports, "t", {
     return _t["default"];
   }
 });
-Object.defineProperty(exports, "Tabs", {
-  enumerable: true,
-  get: function get() {
-    return _Tabs["default"];
-  }
-});
 
 var _hooks = require("./hooks");
 
@@ -93,8 +86,6 @@ var _post = _interopRequireWildcard(require("./post"));
 var _config = _interopRequireDefault(require("./config"));
 
 var _t = _interopRequireDefault(require("./t"));
-
-var _Tabs = _interopRequireDefault(require("./Tabs"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
