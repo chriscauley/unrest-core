@@ -37,21 +37,15 @@ var useSelect = function useSelect() {
   };
 
   _react["default"].useEffect(function () {
-    var close = function close(e) {
+    var close = function close(event) {
       if (open) {
-        var keys = Object.keys(refs);
+        var refs = [toggleRef.current, childRef.current];
 
-        for (var i = 0; i < keys.length; i++) {
-          var current = refs[keys[i]].current;
-
-          if (current) {
-            if (current === e.target || current.contains(e.target)) {
-              return;
-            }
-          }
+        if (!refs.find(function (element) {
+          return element.contains(event.target);
+        })) {
+          setOpen(false);
         }
-
-        setOpen(false);
       }
     };
 
