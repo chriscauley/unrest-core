@@ -13,6 +13,7 @@ var _exportNames = {
   afterFetch: true,
   handleError: true,
   postForm: true,
+  Pagination: true,
   SchemaForm: true,
   config: true,
   t: true,
@@ -60,6 +61,12 @@ Object.defineProperty(exports, "postForm", {
     return _post.postForm;
   }
 });
+Object.defineProperty(exports, "Pagination", {
+  enumerable: true,
+  get: function get() {
+    return _Pagination["default"];
+  }
+});
 Object.defineProperty(exports, "SchemaForm", {
   enumerable: true,
   get: function get() {
@@ -105,6 +112,8 @@ var _Dropdown = _interopRequireDefault(require("./Dropdown"));
 var _Modal = _interopRequireDefault(require("./Modal"));
 
 var _post = _interopRequireWildcard(require("./post"));
+
+var _Pagination = _interopRequireDefault(require("./Pagination"));
 
 var _SchemaForm = _interopRequireDefault(require("./SchemaForm"));
 
