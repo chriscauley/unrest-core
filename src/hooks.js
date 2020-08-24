@@ -10,7 +10,7 @@ export const useSelect = () => {
     const close = (event) => {
       if (open) {
         const refs = [toggleRef.current, childRef.current]
-        if (!refs.find((element) => element.contains(event.target))) {
+        if (!refs.find((el) => el && el.contains(event.target))) {
           setOpen(false)
         }
       }

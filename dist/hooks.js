@@ -41,8 +41,8 @@ var useSelect = function useSelect() {
       if (open) {
         var refs = [toggleRef.current, childRef.current];
 
-        if (!refs.find(function (element) {
-          return element.contains(event.target);
+        if (!refs.find(function (el) {
+          return el && el.contains(event.target);
         })) {
           setOpen(false);
         }
