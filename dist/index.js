@@ -13,6 +13,7 @@ var _exportNames = {
   afterFetch: true,
   handleError: true,
   postForm: true,
+  SchemaForm: true,
   config: true,
   t: true,
   assert: true
@@ -59,6 +60,12 @@ Object.defineProperty(exports, "postForm", {
     return _post.postForm;
   }
 });
+Object.defineProperty(exports, "SchemaForm", {
+  enumerable: true,
+  get: function get() {
+    return _SchemaForm["default"];
+  }
+});
 Object.defineProperty(exports, "config", {
   enumerable: true,
   get: function get() {
@@ -98,6 +105,8 @@ var _Dropdown = _interopRequireDefault(require("./Dropdown"));
 var _Modal = _interopRequireDefault(require("./Modal"));
 
 var _post = _interopRequireWildcard(require("./post"));
+
+var _SchemaForm = _interopRequireDefault(require("./SchemaForm"));
 
 var _config = _interopRequireDefault(require("./config"));
 
