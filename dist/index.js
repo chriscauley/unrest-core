@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var _exportNames = {
+  admin: true,
   alert: true,
   Dropdown: true,
   Modal: true,
@@ -19,6 +20,12 @@ var _exportNames = {
   t: true,
   assert: true
 };
+Object.defineProperty(exports, "admin", {
+  enumerable: true,
+  get: function get() {
+    return _admin["default"];
+  }
+});
 Object.defineProperty(exports, "alert", {
   enumerable: true,
   get: function get() {
@@ -104,6 +111,8 @@ Object.keys(_hooks).forEach(function (key) {
     }
   });
 });
+
+var _admin = _interopRequireDefault(require("./admin"));
 
 var _alert = _interopRequireDefault(require("./alert"));
 

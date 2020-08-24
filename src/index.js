@@ -1,4 +1,5 @@
 export * from './hooks'
+export { default as admin } from './admin'
 export { default as alert } from './alert'
 export { default as Dropdown } from './Dropdown'
 export { default as Modal } from './Modal'
