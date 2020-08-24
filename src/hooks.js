@@ -8,16 +8,7 @@ export const useSelect = () => {
   const toggle = () => setOpen(!open)
   React.useEffect(() => {
     const close = (e) => {
-      if (open) {
-        const keys = Object.keys(refs)
-        for (let i=0;i<keys.length;i++) {
-          const current = refs[keys[i]].current
-          if (current) {
-            if (current === e.target || current.contains(e.target)) {
-              return
-            }
-          }
-        }
+      if (open && ![toggleRef.current, childRef].includes(e.target)) {
         setOpen(false)
       }
     }
@@ -26,10 +17,10 @@ export const useSelect = () => {
       document.removeEventListener('click', close)
     }
   })
-  return {open, setOpen, toggle, toggleRef, childRef}
+  return { open, setOpen, toggle, toggleRef, childRef }
 }
 
-export const useAutoScroll = ({behavior = 'smooth', block = 'end'} = {}) => {
+export const useAutoScroll = ({ behavior = 'smooth', block = 'end' } = {}) => {
   const ref = React.useRef()
   const [{ enabled, first }, setState] = React.useState({
     enabled: true,

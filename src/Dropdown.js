@@ -9,7 +9,7 @@ const DropdownLink = ({ disabled, badge, children, ...props }) => {
     delete props.onClick
   }
   return (
-    <Tag className={css.dropdown.item({disabled})} {...props}>
+    <Tag className={css.dropdown.item({ disabled })} {...props}>
       {children}
       {badge ? <span className={css.badge.danger()}>{badge}</span> : null}
     </Tag>

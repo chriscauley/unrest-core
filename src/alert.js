@@ -67,7 +67,7 @@ const useAlert = globalHook(React, { items: [] }, actions)
 
 export const connect = (Component) => (props) => {
   const [{ items }, actions] = useAlert()
-  return <Component {...props} alert={{items, ...actions}} />
+  return <Component {...props} alert={{ items, ...actions }} />
 }
 
 export const List = connect((props) => {
