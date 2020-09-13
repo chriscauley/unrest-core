@@ -38,7 +38,7 @@ var useSelect = function useSelect() {
 
   _react["default"].useEffect(function () {
     var close = function close(event) {
-      if (open) {
+      if (open && document.body.contains(event.target)) {
         var refs = [toggleRef.current, childRef.current];
 
         if (!refs.find(function (el) {
@@ -53,7 +53,7 @@ var useSelect = function useSelect() {
     return function () {
       document.removeEventListener('click', close);
     };
-  });
+  }, [open]);
 
   return {
     open: open,

@@ -8,7 +8,7 @@ export const useSelect = () => {
   const toggle = () => setOpen(!open)
   React.useEffect(() => {
     const close = (event) => {
-      if (open) {
+      if (open && document.body.contains(event.target)) {
         const refs = [toggleRef.current, childRef.current]
         if (!refs.find((el) => el && el.contains(event.target))) {
           setOpen(false)
@@ -19,7 +19,7 @@ export const useSelect = () => {
     return () => {
       document.removeEventListener('click', close)
     }
-  })
+  }, [open])
   return { open, setOpen, toggle, toggleRef, childRef }
 }
 
