@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.useAutoScroll = exports.useSelect = void 0;
+exports["default"] = exports.useAutoScroll = exports.useSelect = exports.useLocalStorage = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -21,12 +21,31 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// designed to work like <select> element, this triggers open=false when any non-ref'd element is clicked
-var useSelect = function useSelect() {
-  var _React$useState = _react["default"].useState(false),
+var useLocalStorage = function useLocalStorage(key, initial) {
+  // Save any json serializable object in localStorage to persist between reloads
+  var saved = localStorage.getItem(key);
+
+  var _React$useState = _react["default"].useState(saved === null ? initial : JSON.parse(saved)),
       _React$useState2 = _slicedToArray(_React$useState, 2),
-      open = _React$useState2[0],
-      setOpen = _React$useState2[1];
+      value = _React$useState2[0],
+      set = _React$useState2[1];
+
+  var save = function save(new_value) {
+    localStorage.setItem(key, JSON.stringify(new_value));
+    set(new_value);
+  };
+
+  return [value, save];
+}; // designed to work like <select> element, this triggers open=false when any non-ref'd element is clicked
+
+
+exports.useLocalStorage = useLocalStorage;
+
+var useSelect = function useSelect() {
+  var _React$useState3 = _react["default"].useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      open = _React$useState4[0],
+      setOpen = _React$useState4[1];
 
   var toggleRef = _react["default"].useRef();
 
@@ -75,15 +94,15 @@ var useAutoScroll = function useAutoScroll() {
 
   var ref = _react["default"].useRef();
 
-  var _React$useState3 = _react["default"].useState({
+  var _React$useState5 = _react["default"].useState({
     enabled: true,
     first: false
   }),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      _React$useState4$ = _React$useState4[0],
-      enabled = _React$useState4$.enabled,
-      first = _React$useState4$.first,
-      setState = _React$useState4[1];
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      _React$useState6$ = _React$useState6[0],
+      enabled = _React$useState6$.enabled,
+      first = _React$useState6$.first,
+      setState = _React$useState6[1];
 
   var e = ref.current;
 

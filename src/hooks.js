@@ -1,5 +1,18 @@
 import React from 'react'
 
+export const useLocalStorage = (key, initial) => {
+  // Save any json serializable object in localStorage to persist between reloads
+  const saved = localStorage.getItem(key)
+  const [value, set] = React.useState(
+    saved === null ? initial : JSON.parse(saved),
+  )
+  const save = (new_value) => {
+    localStorage.setItem(key, JSON.stringify(new_value))
+    set(new_value)
+  }
+  return [value, save]
+}
+
 // designed to work like <select> element, this triggers open=false when any non-ref'd element is clicked
 export const useSelect = () => {
   const [open, setOpen] = React.useState(false)

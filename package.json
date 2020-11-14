@@ -43,11 +43,6 @@
     "jest": "^25.3.0",
     "parcel": "^1.12.4",
     "prettier": "^2.0.4",
-    "react": ">=15",
-    "react-dom": "^16.13.1",
-    "react-jsonschema-form": "^2.0.0-alpha.1",
-    "react-router-dom": "^5.2.0",
-    "react-test-renderer": "^16.13.1",
     "use-global-hook": "^0.1.12"
   }
 }
