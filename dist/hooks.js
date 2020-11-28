@@ -104,22 +104,16 @@ var useAutoScroll = function useAutoScroll() {
       first = _React$useState6$.first,
       setState = _React$useState6[1];
 
-  var e = ref.current;
-
   var scroll = function scroll() {
-    if (!first) {
-      e.scrollIntoView({
-        block: block
-      });
-    } else {
-      e.scrollIntoView({
-        behavior: behavior,
-        block: block
-      });
-    }
+    ref.current.scrollIntoView({
+      block: block,
+      behavior: first ? behavior : 'instant'
+    });
   };
 
-  e && enabled && setTimeout(scroll, 0);
+  _react["default"].useEffect(function () {
+    ref.current && enabled && scroll();
+  });
 
   var onScroll = function onScroll(_ref2) {
     var target = _ref2.target;

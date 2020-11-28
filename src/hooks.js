@@ -42,15 +42,15 @@ export const useAutoScroll = ({ behavior = 'smooth', block = 'end' } = {}) => {
     enabled: true,
     first: false,
   })
-  const e = ref.current
   const scroll = () => {
-    if (!first) {
-      e.scrollIntoView({ block })
-    } else {
-      e.scrollIntoView({ behavior, block })
-    }
+    ref.current.scrollIntoView({
+      block,
+      behavior: first ? behavior : 'instant',
+    })
   }
-  e && enabled && setTimeout(scroll, 0)
+  React.useEffect(() => {
+    ref.current && enabled && scroll()
+  })
   const onScroll = ({ target }) => {
     const { scrollHeight, scrollTop, clientHeight } = target
     const new_enabled = scrollHeight === scrollTop + clientHeight
