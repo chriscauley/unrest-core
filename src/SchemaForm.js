@@ -4,9 +4,11 @@ import RestHook from '@unrest/react-rest-hook'
 
 import post from './post'
 
+const noop = (a) => a
+
 export const useSchema = RestHook('/api/schema/${form_name}/').use
 
-export default function SchemaForm(props) {
+export default function SchemaForm({ prepSchema = noop, ...props }) {
   const { loading, makeUrl, schema } = useSchema(props)
   const onSubmit = (formData) => post(makeUrl(props), formData)
   if (loading && !schema) {
@@ -14,10 +16,10 @@ export default function SchemaForm(props) {
   }
   return (
     <Form
-      {...props}
-      schema={schema}
+      schema={prepSchema(schema)}
       onSubmit={onSubmit}
       className="max-w-3xl mx-auto mt-4"
+      {...props}
     />
   )
 }
