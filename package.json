@@ -18,7 +18,7 @@
   },
   "peerDependencies": {
     "@unrest/css": "chriscauley/unrest-css",
-    "@unrest/react-rest-hook": "chriscauley/unrest-react-rest-hook",
+    "@unrest/react-rest-hook": "0.0.6",
     "classnames": "^2.2.6",
     "react": ">=15",
     "react-jsonschema-form": "^2.0.0-alpha.1"

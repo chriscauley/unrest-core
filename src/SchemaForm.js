@@ -6,10 +6,16 @@ import post from './post'
 
 const noop = (a) => a
 
-export const useSchema = RestHook('/api/schema/${form_name}/').use
+const hook = RestHook('/api/schema/${form_name}/')
 
-export default function SchemaForm({ prepSchema = noop, ...props }) {
-  const { loading, makeUrl, schema } = useSchema(props)
+export const useSchema = hook.use
+
+export default function SchemaForm({
+  prepSchema = noop,
+  onSuccess = noop,
+  ...props
+}) {
+  const { loading, makeUrl, schema, clearData } = useSchema(props)
   const onSubmit = (formData) => post(makeUrl(props), formData)
   if (loading && !schema) {
     return null
@@ -18,6 +24,10 @@ export default function SchemaForm({ prepSchema = noop, ...props }) {
     <Form
       schema={prepSchema(schema)}
       onSubmit={onSubmit}
+      onSuccess={(data) => {
+        setTimeout(() => clearData(props))
+        return onSuccess(data)
+      }}
       className="max-w-3xl mx-auto mt-4"
       {...props}
     />

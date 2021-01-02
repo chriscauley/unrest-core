@@ -26,18 +26,22 @@ var noop = function noop(a) {
   return a;
 };
 
-var useSchema = (0, _reactRestHook["default"])('/api/schema/${form_name}/').use;
+var hook = (0, _reactRestHook["default"])('/api/schema/${form_name}/');
+var useSchema = hook.use;
 exports.useSchema = useSchema;
 
 function SchemaForm(_ref) {
   var _ref$prepSchema = _ref.prepSchema,
       prepSchema = _ref$prepSchema === void 0 ? noop : _ref$prepSchema,
-      props = _objectWithoutProperties(_ref, ["prepSchema"]);
+      _ref$onSuccess = _ref.onSuccess,
+      _onSuccess = _ref$onSuccess === void 0 ? noop : _ref$onSuccess,
+      props = _objectWithoutProperties(_ref, ["prepSchema", "onSuccess"]);
 
   var _useSchema = useSchema(props),
       loading = _useSchema.loading,
       makeUrl = _useSchema.makeUrl,
-      schema = _useSchema.schema;
+      schema = _useSchema.schema,
+      clearData = _useSchema.clearData;
 
   var onSubmit = function onSubmit(formData) {
     return (0, _post["default"])(makeUrl(props), formData);
@@ -50,6 +54,12 @@ function SchemaForm(_ref) {
   return /*#__PURE__*/_react["default"].createElement(_reactJsonschemaForm["default"], _extends({
     schema: prepSchema(schema),
     onSubmit: onSubmit,
+    onSuccess: function onSuccess(data) {
+      setTimeout(function () {
+        return clearData(props);
+      });
+      return _onSuccess(data);
+    },
     className: "max-w-3xl mx-auto mt-4"
   }, props));
 }
