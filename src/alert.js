@@ -63,10 +63,14 @@ const actions = {
   warning: _add('warning'),
 }
 
-const useAlert = globalHook(React, { items: [] }, actions)
+const hook = globalHook(React, { items: [] }, actions)
+const use = () => {
+  const [state, actions] = hook()
+  return { ...state, ...actions }
+}
 
 export function AlertList() {
-  const [{ items }, { remove }] = useAlert()
+  const { items, remove } = use()
   return (
     <div className={css.snackbar()}>
       <div className={css.snackbar.container()}>
@@ -93,11 +97,11 @@ function TestAlert() {
   const [i, setI] = React.useState(0)
   const types = ['info', 'success', 'error', 'warning']
   const words = ['what', 'do']
-  const alertActions = useAlert()[1]
+  const alert = use()
   const onClick = () => {
     const type = types[i % types.length]
     const text = words[i % words.length]
-    alertActions[type](text)
+    alert[type](text)
     setI(i + 1)
   }
   return <button onClick={onClick}>Click me</button>
@@ -110,5 +114,9 @@ export default {
   List: AlertList,
   TestAlert,
   config,
-  useAlert,
+  useAlert() {
+    console.warn('alert.useAlert is depractated, do alert.use() instead')
+    return use()
+  },
+  use,
 }

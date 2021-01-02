@@ -2,9 +2,8 @@ import React from 'react'
 import Form from '@unrest/react-jsonschema-form'
 import RestHook from '@unrest/react-rest-hook'
 
+import { noop } from './utils'
 import post from './post'
-
-const noop = (a) => a
 
 const hook = RestHook('/api/schema/${form_name}/')
 

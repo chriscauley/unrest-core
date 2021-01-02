@@ -116,15 +116,23 @@ var actions = {
   error: _add('error'),
   warning: _add('warning')
 };
-var useAlert = (0, _useGlobalHook["default"])(_react["default"], {
+var hook = (0, _useGlobalHook["default"])(_react["default"], {
   items: []
 }, actions);
 
+var use = function use() {
+  var _hook = hook(),
+      _hook2 = _slicedToArray(_hook, 2),
+      state = _hook2[0],
+      actions = _hook2[1];
+
+  return _objectSpread(_objectSpread({}, state), actions);
+};
+
 function AlertList() {
-  var _useAlert = useAlert(),
-      _useAlert2 = _slicedToArray(_useAlert, 2),
-      items = _useAlert2[0].items,
-      remove = _useAlert2[1].remove;
+  var _use = use(),
+      items = _use.items,
+      remove = _use.remove;
 
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: _css["default"].snackbar()
@@ -155,12 +163,12 @@ function TestAlert() {
 
   var types = ['info', 'success', 'error', 'warning'];
   var words = ['what', 'do'];
-  var alertActions = useAlert()[1];
+  var alert = use();
 
   var onClick = function onClick() {
     var type = types[i % types.length];
     var text = words[i % words.length];
-    alertActions[type](text);
+    alert[type](text);
     setI(i + 1);
   };
 
@@ -176,6 +184,9 @@ var _default = {
   List: AlertList,
   TestAlert: TestAlert,
   config: config,
-  useAlert: useAlert
+  useAlert: function useAlert() {
+    console.warn('alert.useAlert is depractated, do alert.use() instead');
+  },
+  use: use
 };
 exports["default"] = _default;

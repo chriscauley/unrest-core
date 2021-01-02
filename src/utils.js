@@ -7,3 +7,5 @@ export const assert = (bool, error) => {
     throw funct(error)
   }
 }
+
+export const noop = (a) => a
