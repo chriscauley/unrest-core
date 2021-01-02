@@ -50,10 +50,8 @@ function ConfirmDelete(_ref) {
 
   var url = "/api/admin/".concat(model_name, "/").concat(id, "/delete/");
 
-  var _alert$useAlert = _core.alert.useAlert(),
-      _alert$useAlert2 = _slicedToArray(_alert$useAlert, 2),
-      _ = _alert$useAlert2[0],
-      success = _alert$useAlert2[1].success;
+  var _alert$use = _core.alert.use(),
+      success = _alert$use.success;
 
   var afterDelete = function afterDelete() {
     success("".concat(model_name, " deleted!"));
@@ -136,10 +134,8 @@ function EditUser(_ref5) {
       model_name = _match$params.model_name,
       id = _match$params.id;
 
-  var _alert$useAlert3 = _core.alert.useAlert(),
-      _alert$useAlert4 = _slicedToArray(_alert$useAlert3, 2),
-      _ = _alert$useAlert4[0],
-      success = _alert$useAlert4[1].success;
+  var _alert$use2 = _core.alert.use(),
+      success = _alert$use2.success;
 
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: "p-4"

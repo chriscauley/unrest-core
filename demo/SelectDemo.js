@@ -1,14 +1,12 @@
 import React from 'react'
 import css from '@unrest/css'
 
-import { alert, Select } from '../src'
-
-const useSelect = Select()
+import { alert, useSelect } from '../src'
 
 export default function SelectDemo(props) {
   const [open, setOpen, getRef] = useSelect()
   const [count, setCount] = React.useState(0)
-  const [_, {success}] = alert.useAlert()
+  const {success} = alert.use()
 
   const clickCount = () => {
     setCount(count + 1)

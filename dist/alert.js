@@ -186,6 +186,7 @@ var _default = {
   config: config,
   useAlert: function useAlert() {
     console.warn('alert.useAlert is depractated, do alert.use() instead');
+    return use();
   },
   use: use
 };

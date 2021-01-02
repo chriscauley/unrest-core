@@ -8,7 +8,7 @@ import { pascalCase, titleCase } from './utils'
 export default function AddModel({ match }) {
   const history = useHistory()
   const { model_name } = match.params
-  const [_, { success }] = alert.useAlert()
+  const { success } = alert.use()
   const onSuccess = ({ id }) => {
     success(`${titleCase(model_name)} created you can now edit it below`)
     history.push(`/admin/user/edit/${id}/`)

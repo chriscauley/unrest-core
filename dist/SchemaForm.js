@@ -12,6 +12,8 @@ var _reactJsonschemaForm = _interopRequireDefault(require("@unrest/react-jsonsch
 
 var _reactRestHook = _interopRequireDefault(require("@unrest/react-rest-hook"));
 
+var _utils = require("./utils");
+
 var _post = _interopRequireDefault(require("./post"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -22,19 +24,15 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-var noop = function noop(a) {
-  return a;
-};
-
 var hook = (0, _reactRestHook["default"])('/api/schema/${form_name}/');
 var useSchema = hook.use;
 exports.useSchema = useSchema;
 
 function SchemaForm(_ref) {
   var _ref$prepSchema = _ref.prepSchema,
-      prepSchema = _ref$prepSchema === void 0 ? noop : _ref$prepSchema,
+      prepSchema = _ref$prepSchema === void 0 ? _utils.noop : _ref$prepSchema,
       _ref$onSuccess = _ref.onSuccess,
-      _onSuccess = _ref$onSuccess === void 0 ? noop : _ref$onSuccess,
+      _onSuccess = _ref$onSuccess === void 0 ? _utils.noop : _ref$onSuccess,
       props = _objectWithoutProperties(_ref, ["prepSchema", "onSuccess"]);
 
   var _useSchema = useSchema(props),

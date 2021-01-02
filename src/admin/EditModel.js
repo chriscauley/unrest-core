@@ -11,7 +11,7 @@ const api = RestHook('/api/admin/${model_name}/${id}/preview_delete/')
 function ConfirmDelete({ model_name, id, cancel, history }) {
   const { records = {} } = api.use({ model_name, id })
   const url = `/api/admin/${model_name}/${id}/delete/`
-  const [_, { success }] = alert.useAlert()
+  const { success } = alert.use()
   const afterDelete = () => {
     success(`${model_name} deleted!`)
     history.replace('../..')
@@ -70,7 +70,7 @@ function DeleteObject({ model_name, id, history }) {
 
 export default function EditUser({ match, history }) {
   const { model_name, id } = match.params
-  const [_, { success }] = alert.useAlert()
+  const { success } = alert.use()
   return (
     <div className="p-4">
       <div className="flex justify-between">
