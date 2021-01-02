@@ -65,13 +65,8 @@ const actions = {
 
 const useAlert = globalHook(React, { items: [] }, actions)
 
-export const connect = (Component) => (props) => {
-  const [{ items }, actions] = useAlert()
-  return <Component {...props} alert={{ items, ...actions }} />
-}
-
-export const List = connect((props) => {
-  const { items, remove } = props.alert
+export function AlertList() {
+  const [{ items }, { remove }] = useAlert()
   return (
     <div className={css.snackbar()}>
       <div className={css.snackbar.container()}>
@@ -92,27 +87,27 @@ export const List = connect((props) => {
       </div>
     </div>
   )
-})
+}
 
-const TestAlert = (() => {
+function TestAlert() {
+  const [i, setI] = React.useState(0)
   const types = ['info', 'success', 'error', 'warning']
   const words = ['what', 'do']
-  let i = 0
-  return connect((props) => {
-    const onClick = () => {
-      const type = types[i % types.length]
-      const text = words[i % words.length]
-      alert[type](text)
-      i++
-    }
-    const { alert } = props
-    return <button onClick={onClick}>Click me</button>
-  })
-})()
+  const alertActions = useAlert()[1]
+  const onClick = () => {
+    const type = types[i % types.length]
+    const text = words[i % words.length]
+    alertActions[type](text)
+    setI(i + 1)
+  }
+  return <button onClick={onClick}>Click me</button>
+}
 
 export default {
-  connect,
-  List,
+  connect: () => {
+    throw 'Deprecation Error: alert.connect is no longer supported, use alert.use instead.'
+  },
+  List: AlertList,
   TestAlert,
   config,
   useAlert,

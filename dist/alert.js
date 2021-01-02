@@ -3,7 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.List = exports.connect = exports.config = void 0;
+exports.AlertList = AlertList;
+exports["default"] = exports.config = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -12,8 +13,6 @@ var _css = _interopRequireDefault(require("@unrest/css"));
 var _useGlobalHook = _interopRequireDefault(require("use-global-hook"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -121,26 +120,12 @@ var useAlert = (0, _useGlobalHook["default"])(_react["default"], {
   items: []
 }, actions);
 
-var connect = function connect(Component) {
-  return function (props) {
-    var _useAlert = useAlert(),
-        _useAlert2 = _slicedToArray(_useAlert, 2),
-        items = _useAlert2[0].items,
-        actions = _useAlert2[1];
+function AlertList() {
+  var _useAlert = useAlert(),
+      _useAlert2 = _slicedToArray(_useAlert, 2),
+      items = _useAlert2[0].items,
+      remove = _useAlert2[1].remove;
 
-    return /*#__PURE__*/_react["default"].createElement(Component, _extends({}, props, {
-      alert: _objectSpread({
-        items: items
-      }, actions)
-    }));
-  };
-};
-
-exports.connect = connect;
-var List = connect(function (props) {
-  var _props$alert = props.alert,
-      items = _props$alert.items,
-      remove = _props$alert.remove;
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: _css["default"].snackbar()
   }, /*#__PURE__*/_react["default"].createElement("div", {
@@ -160,31 +145,35 @@ var List = connect(function (props) {
       className: _css["default"].icon('close cursor-pointer')
     })));
   })));
-});
-exports.List = List;
+}
 
-var TestAlert = function () {
+function TestAlert() {
+  var _React$useState = _react["default"].useState(0),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      i = _React$useState2[0],
+      setI = _React$useState2[1];
+
   var types = ['info', 'success', 'error', 'warning'];
   var words = ['what', 'do'];
-  var i = 0;
-  return connect(function (props) {
-    var onClick = function onClick() {
-      var type = types[i % types.length];
-      var text = words[i % words.length];
-      alert[type](text);
-      i++;
-    };
+  var alertActions = useAlert()[1];
 
-    var alert = props.alert;
-    return /*#__PURE__*/_react["default"].createElement("button", {
-      onClick: onClick
-    }, "Click me");
-  });
-}();
+  var onClick = function onClick() {
+    var type = types[i % types.length];
+    var text = words[i % words.length];
+    alertActions[type](text);
+    setI(i + 1);
+  };
+
+  return /*#__PURE__*/_react["default"].createElement("button", {
+    onClick: onClick
+  }, "Click me");
+}
 
 var _default = {
-  connect: connect,
-  List: List,
+  connect: function connect() {
+    throw 'Deprecation Error: alert.connect is no longer supported, use alert.use instead.';
+  },
+  List: AlertList,
   TestAlert: TestAlert,
   config: config,
   useAlert: useAlert
