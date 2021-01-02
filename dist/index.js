@@ -17,8 +17,7 @@ var _exportNames = {
   Pagination: true,
   SchemaForm: true,
   config: true,
-  t: true,
-  assert: true
+  t: true
 };
 Object.defineProperty(exports, "admin", {
   enumerable: true,
@@ -92,22 +91,31 @@ Object.defineProperty(exports, "t", {
     return _t["default"];
   }
 });
-Object.defineProperty(exports, "assert", {
-  enumerable: true,
-  get: function get() {
-    return _assert["default"];
-  }
-});
 
 var _hooks = require("./hooks");
 
 Object.keys(_hooks).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _hooks[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function get() {
       return _hooks[key];
+    }
+  });
+});
+
+var _utils = require("./utils");
+
+Object.keys(_utils).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _utils[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _utils[key];
     }
   });
 });
@@ -129,8 +137,6 @@ var _SchemaForm = _interopRequireDefault(require("./SchemaForm"));
 var _config = _interopRequireDefault(require("./config"));
 
 var _t = _interopRequireDefault(require("./t"));
-
-var _assert = _interopRequireDefault(require("./assert"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
