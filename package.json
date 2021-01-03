@@ -11,10 +11,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && yarn babel src -d dist",
-    "build/docs": "rm -rf docs && yarn parcel build demo/index.html --public-url /unrest-core/ -d docs",
     "lint": "yarn eslint src/",
-    "test": "yarn jest",
-    "develop": "yarn parcel demo/index.html -p 3345 -d .dist"
+    "test": "yarn jest"
   },
   "peerDependencies": {
     "@unrest/css": "chriscauley/unrest-css",
@@ -24,11 +22,11 @@
     "react-jsonschema-form": "^2.0.0-alpha.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/preset-react": "^7.9.4",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
     "@testing-library/react": "^10.0.2",
     "@unrest/css": "^0.0.5",
     "@unrest/tailwind": "^0.0.4",
@@ -41,7 +39,6 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "jest": "^25.3.0",
-    "parcel": "^1.12.4",
     "prettier": "^2.0.4",
     "use-global-hook": "^0.1.12"
   }
