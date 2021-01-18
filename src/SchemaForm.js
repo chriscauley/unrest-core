@@ -14,7 +14,7 @@ export default function SchemaForm({
   onSuccess = noop,
   ...props
 }) {
-  const { loading, makeUrl, schema, clearData } = useSchema(props)
+  const { loading, makeUrl, schema, setData } = useSchema(props)
   const onSubmit = (formData) => post(makeUrl(props), formData)
   if (loading && !schema) {
     return null
@@ -24,7 +24,7 @@ export default function SchemaForm({
       schema={prepSchema(schema)}
       onSubmit={onSubmit}
       onSuccess={(data) => {
-        setTimeout(() => clearData(props))
+        setData(data)
         return onSuccess(data)
       }}
       className="max-w-3xl mx-auto mt-4"

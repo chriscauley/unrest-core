@@ -39,7 +39,7 @@ function SchemaForm(_ref) {
       loading = _useSchema.loading,
       makeUrl = _useSchema.makeUrl,
       schema = _useSchema.schema,
-      clearData = _useSchema.clearData;
+      setData = _useSchema.setData;
 
   var onSubmit = function onSubmit(formData) {
     return (0, _post["default"])(makeUrl(props), formData);
@@ -53,9 +53,7 @@ function SchemaForm(_ref) {
     schema: prepSchema(schema),
     onSubmit: onSubmit,
     onSuccess: function onSuccess(data) {
-      setTimeout(function () {
-        return clearData(props);
-      });
+      setData(data);
       return _onSuccess(data);
     },
     className: "max-w-3xl mx-auto mt-4"
